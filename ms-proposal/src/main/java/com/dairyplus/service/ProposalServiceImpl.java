@@ -9,6 +9,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 
 @ApplicationScoped
@@ -57,5 +58,19 @@ public class ProposalServiceImpl implements ProposalService {
     @Transactional
     public void removeProposal(UUID id) {
         proposalRepository.deleteById(id);
+    }
+
+    @Override
+    public List<ProposalDetailsDTO> findAllProposals() {
+        return proposalRepository.findAll().stream()
+                .map(entity -> ProposalDetailsDTO.builder()
+                        .id(entity.getId())
+                        .customer(entity.getCustomer())
+                        .gallonPrice(entity.getGallonPrice())
+                        .gallons(entity.getGallons())
+                        .country(entity.getCountry())
+                        .proposalValidityDays(entity.getProposalValidityDays())
+                        .build())
+                .toList();
     }
 }
