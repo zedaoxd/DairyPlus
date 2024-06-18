@@ -1,28 +1,30 @@
 package com.dairyplus.controller;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
+
 import com.dairyplus.service.OpportunityService;
+
+import io.quarkus.security.Authenticated;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import lombok.extern.slf4j.Slf4j;
 
 @Path("/api/opportunities")
-@Slf4j
+@Authenticated
 public class OppotunityController {
 
     @Inject
     OpportunityService opportunityService;
 
+    @Inject
+    JsonWebToken jwt;
+
     @GET
-    @Path("/report")
-    @Produces(MediaType.APPLICATION_OCTET_STREAM)
-    public Response generateOpportunityReport() {
-        log.info("Generating opportunity report");
-        return Response.ok(opportunityService.generateCSVOpportunity(), MediaType.APPLICATION_OCTET_STREAM_TYPE)
-                .header("Content-Disposition", "attachment; filename=opportunities.csv")
-                .build();
+    @Path("/data")
+    @RolesAllowed({ "manager", "user" })
+    public Response generateOpportunity() {
+        return Response.ok(opportunityService.generateOpportunity()).build();
     }
 }

@@ -33,12 +33,15 @@
     <dependencies>
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
+            <artifactId>quarkus-oidc</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-csv</artifactId>
-            <version>1.8</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-oidc-token-propagation-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-smallrye-reactive-messaging-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

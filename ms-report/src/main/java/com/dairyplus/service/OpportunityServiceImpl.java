@@ -7,7 +7,6 @@ import com.dairyplus.entity.OpportunityEntity;
 import com.dairyplus.entity.QuotationEntity;
 import com.dairyplus.repository.OpportunityRepository;
 import com.dairyplus.repository.QuotationRepository;
-import com.dairyplus.utils.CSVHelper;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -47,17 +46,10 @@ public class OpportunityServiceImpl implements OpportunityService {
 
     @Override
     public List<OpportunityDTO> generateOpportunity() {
-        return null;
-    }
-
-    @Override
-    public ByteArrayInputStream generateCSVOpportunity() {
-        var opportunitiesDTO = opportunityRepository
+        return opportunityRepository
                 .listAll()
                 .stream()
                 .map(OpportunityEntity::toDTO)
                 .toList();
-
-        return CSVHelper.opportunitiesToCSV(opportunitiesDTO);
     }
 }
