@@ -11,7 +11,6 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 
 @ApplicationScoped
