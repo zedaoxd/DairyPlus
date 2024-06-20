@@ -13,7 +13,10 @@ import jakarta.transaction.Transactional;
 
 import java.util.List;
 
+import org.eclipse.microprofile.opentracing.Traced;
+
 @ApplicationScoped
+@Traced
 public class OpportunityServiceImpl implements OpportunityService {
     @Inject
     QuotationRepository quotationRepository;

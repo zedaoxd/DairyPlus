@@ -12,7 +12,10 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.UUID;
 
+import org.eclipse.microprofile.opentracing.Traced;
+
 @ApplicationScoped
+@Traced
 public class ProposalServiceImpl implements ProposalService {
 
     @Inject
