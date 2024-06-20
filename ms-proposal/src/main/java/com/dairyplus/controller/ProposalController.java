@@ -27,19 +27,19 @@ public class ProposalController {
 
     @GET
     @Path("/{id}")
-    @RolesAllowed({ "manager", "user" })
+    @RolesAllowed("proposal:read")
     public Response getProposal(@PathParam("id") UUID id) {
         return Response.ok(proposalService.findFullProposalById(id)).build();
     }
 
     @GET
-    @RolesAllowed({ "manager", "user" })
+    @RolesAllowed("proposal:read")
     public Response getProposals() {
         return Response.ok(proposalService.findAllProposals()).build();
     }
 
     @POST
-    @RolesAllowed("proposal:write")
+    @RolesAllowed("proposal:create")
     public Response createProposal(ProposalDetailsDTO dto) {
         log.info("Received proposal creation request: {}", dto);
         proposalService.createProposal(dto);
@@ -48,7 +48,7 @@ public class ProposalController {
 
     @DELETE
     @Path("/{id}")
-    @RolesAllowed("manager")
+    @RolesAllowed("proposal:delete")
     public Response deleteProposal(@PathParam("id") UUID id) {
         proposalService.removeProposal(id);
         return Response.noContent().build();
