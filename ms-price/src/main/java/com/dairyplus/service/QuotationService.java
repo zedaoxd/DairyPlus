@@ -32,10 +32,14 @@ public class QuotationService {
         if (updateCurrentInfoPrice(dto)) {
             kafkaEvents.sendNewKafkaEvent(QuotationDTO
                     .builder()
-                            .currentPrice(new BigDecimal(dto.usdbrl().bid()))
-                            .date(new Date())
+                    .currentPrice(new BigDecimal(dto.usdbrl().bid()))
+                    .date(new Date())
                     .build());
         }
+    }
+
+    public void cleanDatabase() {
+        quotationRepository.deleteAll();
     }
 
     private boolean updateCurrentInfoPrice(CurrentPriceDTO dto) {

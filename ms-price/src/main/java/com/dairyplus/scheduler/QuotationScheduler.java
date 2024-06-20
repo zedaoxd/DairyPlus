@@ -17,4 +17,11 @@ public class QuotationScheduler {
     void schedule() {
         quotationService.getCurrentPrice();
     }
+
+    @Transactional
+    // Run every day at midnight
+    @Scheduled(cron = "0 0 0 * * ?")
+    void cleanDatabase() {
+        quotationService.cleanDatabase();
+    }
 }
