@@ -23,7 +23,7 @@ public class OppotunityController {
 
     @GET
     @Path("/data")
-    @RolesAllowed({ "manager", "user" })
+    @RolesAllowed("opportunities:read")
     public Response generateOpportunity() {
         return Response.ok(opportunityService.generateOpportunity()).build();
     }
